@@ -1,0 +1,76 @@
+---
+title: "Sustainable Development Goals Exploratory Data Analysis"
+author: "Eric Scheier"
+date: "2/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(foreign)
+```
+
+# Getting The Data
+
+Data is available from github [here](https://github.com/sdsna/2019USCitiesIndex):
+
+Here were some initial variables I defined while trying to get the data.
+```{r}
+github_url <- "https://github.com/sdsna/2019USCitiesIndex"
+github_url_dta <- "https://github.com/sdsna/2019USCitiesIndex/blob/master/2019USCitiesIndexResults.dta"
+github_url_xlsx <- "https://github.com/sdsna/2019USCitiesIndex/blob/master/2019USCitiesIndexResults.xlsx?raw=true"
+```
+
+Directions for data acquisition:
+
+0. If the data is in your github repository, proceed to the next code block.
+1. Download the data manually from [here](https://github.com/sdsna/2019USCitiesIndex/blob/master/2019USCitiesIndexResults.xlsx?raw=true).
+2. Download the `Results` and `Codebook` sheets as `.csv` files.
+
+Now we have our data in `.csv` format and we want to join it all together nicely.
+
+```{r}
+library(tidyverse)
+codebook <- read_csv("2019USCitiesIndexResults - Codebook.csv")
+results <- read_csv("2019USCitiesIndexResults - Results.csv")
+
+names(codebook)
+names(results)
+```
+
+# Data Munging
+
+We have 5 types of variables in the `results` dataset:
+
+1. Descriptive
+2. Normalized
+3. Raw Data
+4. Scores
+5. Ranks
+
+```{r}
+
+```
+
+# Questions
+## Rubric Questions
+
+1. What is the objective of the visualisations?
+What elements of the design are related to that objective?
+Are those elements effective in achieving the objective
+Why or why not?
+Are the collection of visualisations necessary and sufficient evidence for the story, i.e. are they complementary/reinforcing?
+How might you approach this task yourself?
+
+
+## Our Questions
+
+# 1. What visualizations are used?
+
+2. How restrictive is framework?
+
+3. Do the colors have meaning?
+
+4. What are some options for other visualizations?
+
