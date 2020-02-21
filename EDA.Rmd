@@ -24,7 +24,7 @@ github_url_xlsx <- "https://github.com/sdsna/2019USCitiesIndex/blob/master/2019U
 
 Directions for data acquisition:
 
-0. If the data is in your github repository, proceed to the next code block.
+0. If the data is in your working directory, proceed to the next code block.
 1. Download the data manually from [here](https://github.com/sdsna/2019USCitiesIndex/blob/master/2019USCitiesIndexResults.xlsx?raw=true).
 2. Download the `Results` and `Codebook` sheets as `.csv` files.
 
@@ -34,9 +34,11 @@ Now we have our data in `.csv` format and we want to join it all together nicely
 library(tidyverse)
 codebook <- read_csv("2019USCitiesIndexResults - Codebook.csv")
 results <- read_csv("2019USCitiesIndexResults - Results.csv")
+populations <- read_csv("cbsa-est2018-alldata.csv")
 
 names(codebook)
 names(results)
+names(populations)
 ```
 
 # Data Munging
@@ -50,8 +52,52 @@ We have 5 types of variables in the `results` dataset:
 5. Ranks
 
 ```{r}
-
+results[c(1:5,
+          (nrow(results)-5):nrow(results)),
+        c("rank_sdgIndex", 
+       "msa", 
+       "score_sdgi", 
+       paste0(rep("score_sdg",17),c(1:13,15:16)))]
 ```
+
+
+```{r}
+
+scores <- runif(n = 17,min=0,max=100) #rep(100,17)
+sdg_scores <- data.frame(sdg=1:17, score=scores)
+
+
+
+pie <- ggplot(sdg_scores, aes(x=sdg, y=score, fill=factor(sdg))) + 
+  geom_col(width = 1) + 
+  #ylim(c(-50, 100)) + 
+  coord_polar(theta = "x", direction=1) + 
+  scale_fill_manual(values=c("#e5243b", 
+                             "#DDA63A", 
+                             "#4C9F38",
+                             "#C5192D",
+                             "#FF3A21",
+                             "#26BDE2",
+                             "#FCC30B",
+                             "#A21942",
+                             "#FD6925",
+                             "#DD1367",
+                             "#FD9D24",
+                             "#BF8B2E",
+                             "#3F7E44",
+                             "#0A97D9",
+                             "#56C02B",
+                             "#00689D",
+                             "#19486A"
+                             ))
+
+pie
+```
+
+```{r}
+sdg_scores_all <- 
+```
+
 
 # Questions
 ## Rubric Questions
